@@ -35,17 +35,23 @@ fetch("dados/mun_titulos_sda.geojson")
         fillOpacity: 0.7
       }),
       onEachFeature: (feature, layer) => {
-        
-        // --- log ---
-        console.log("Propriedades recebidas:", feature.properties); 
-        // -------------------------
-
         const props = feature.properties;
         const municipio = props.Municipio_ || props.municipio || props.MUNICIPIO1;
         const titulos = props.Títulos || 0;
-
         const popupContent = `<strong>${municipio}</strong><br>Títulos emitidos: ${titulos}`;
+
+        // Associa o conteúdo do popup à camada, mas não o mostra automaticamente
         layer.bindPopup(popupContent);
+
+        // Adiciona um "ouvinte" para o evento de passar o mouse por cima
+        layer.on('mouseover', function (e) {
+            this.openPopup();
+        });
+
+        // Adiciona um "ouvinte" para o evento de tirar o mouse de cima
+        layer.on('mouseout', function (e) {
+            this.closePopup();
+        });
       }
     }).addTo(mapa);
 })
