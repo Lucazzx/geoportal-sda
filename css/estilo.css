@@ -1,12 +1,90 @@
+/* ======================================== */
+/* ESTILOS GERAIS E LAYOUT PRINCIPAL        */
+/* ======================================== */
+
+/* Remove margens e garante que a altura total seja usada */
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Impede a rolagem do corpo da página inteira */
 }
+
+/* O container que cria as duas colunas lado a lado */
+.container-principal {
+    display: flex;
+    flex-direction: row; /* Itens em linha (mapa na esquerda, barra na direita) */
+    width: 100%;
+    height: 100%;
+}
+
+/* ======================================== */
+/* COLUNA DA ESQUERDA (MAPA)                */
+/* ======================================== */
+
+.mapa-container {
+    flex-grow: 1; /* A MÁGICA ACONTECE AQUI: faz o mapa crescer e ocupar todo o espaço disponível */
+}
+
 #mapa {
-  height: 100vh;
-  width: 100vw;
+    width: 100%;
+    height: 100%;
 }
-.leaflet-popup-content {
-  font-size: 14px;
+
+/* ======================================== */
+/* COLUNA DA DIREITA (BARRA LATERAL)        */
+/* ======================================== */
+
+.barra-lateral {
+    width: 400px; /* Largura fixa para a barra lateral */
+    flex-shrink: 0; /* Impede que a barra lateral encolha */
+    background-color: #ffffff; /* Fundo branco */
+    padding: 20px;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+    overflow-y: auto; /* Adiciona uma barra de rolagem SÓ na lateral se o conteúdo for muito grande */
+    border-left: 2px solid #f0f0f0; /* Linha sutil separando do mapa */
+}
+
+/* Organiza o conteúdo do cabeçalho dentro da barra lateral */
+.cabecalho {
+    text-align: center;
+}
+
+.logos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaço entre os logos */
+    margin-bottom: 15px;
+}
+
+.logo {
+    height: 80px;
+}
+
+.texto-cabecalho p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.texto-cabecalho .orgao-principal {
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+}
+
+.titulo-principal {
+    text-align: center;
+    color: #333;
+    margin: 30px 0;
+    font-size: 16px;
+}
+
+/* Estilo para a área de filtros */
+.filtros-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
 }

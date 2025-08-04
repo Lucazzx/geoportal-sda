@@ -1,5 +1,5 @@
 // Inicializa o mapa com centro na Bahia e um nível de zoom adequado
-const mapa = L.map('mapa').setView([-12.5, -41.5], 7); // Aumentei o zoom para 7, fica melhor para a Bahia
+const mapa = L.map('mapa').setView([-13.5, -41.5], 7); // Aumentei o zoom para 7, fica melhor para a Bahia
 
 // Adiciona base OpenStreetMap com atribuição correta
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
