@@ -120,3 +120,24 @@ html, body {
     background-color: transparent !important;
     mix-blend-mode: multiply;
 }
+
+.info.legenda {
+  background: white;
+  padding: 10px 14px;
+  line-height: 20px;
+  color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  border-radius: 5px;
+  width: max-content;
+}
+
+.info.legenda i {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: #ccc;
+  border: 1px solid #999;
+}

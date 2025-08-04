@@ -9,14 +9,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(mapa);
 
-// Função para definir a cor de preenchimento baseada na quantidade de títulos
 function getCor(qtd) {
-  return qtd > 500 ? '#00441b' :
-         qtd > 250 ? '#2a924a' :
-         qtd > 100 ? '#7bc87c' :
-         qtd > 50  ? '#ccebc5' :
-         qtd > 0   ? '#f7fcb9' :
-                     '#f0f0f0'; // Cor para municípios sem títulos ou com dados zerados
+  return qtd > 1000 ? '#00441b' :    // Verde escuro - Muito alto
+         qtd > 500  ? '#2a924a' :    // Verde médio escuro - Alto
+         qtd > 250  ? '#7bc87c' :    // Verde médio - Médio
+         qtd > 50   ? '#ccebc5' :    // Verde claro - Baixo
+                      '#f7fcb9';     // Amarelo claro - Muito baixo ou zero
 }
 
 // Carrega o arquivo GeoJSON (certifique-se que ele foi exportado como EPSG:4326)
@@ -60,4 +58,30 @@ fetch("dados/mun_titulos_sda.geojson")
   .finally(() => {
     // Loading.
     loadingOverlay.style.display = 'none';
-  });
+  })
+  
+  const legenda = L.control({ position: 'topright' });
+
+  legenda.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'info legenda');
+    const grades = [0, 51, 251, 501, 1001];
+    const labels = [
+      '0 – 50',
+      '51 – 250',
+      '251 – 500',
+      '501 – 1000',
+      '> 1000'
+    ];
+
+    div.innerHTML = '<strong>Títulos emitidos</strong><br>';
+
+    for (let i = 0; i < grades.length; i++) {
+      const cor = getCor(grades[i] + 1);
+      div.innerHTML +=
+        `<i style="background:${cor}"></i> ${labels[i]}<br>`;
+    }
+
+    return div;
+  };
+
+  legenda.addTo(mapa);
