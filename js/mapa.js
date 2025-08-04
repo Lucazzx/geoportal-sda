@@ -1,5 +1,8 @@
+// Pega a referência ao elemento de loading que criamos no HTML
+const loadingOverlay = document.getElementById('loading-overlay');
+
 // Inicializa o mapa com centro na Bahia e um nível de zoom adequado
-const mapa = L.map('mapa').setView([-13.5, -41.5], 7); // Aumentei o zoom para 7, fica melhor para a Bahia
+const mapa = L.map('mapa').setView([-13.5, -41.5], 7);
 
 // Adiciona base OpenStreetMap com atribuição correta
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,7 +38,7 @@ fetch("dados/mun_titulos_sda.geojson")
       }),
       onEachFeature: (feature, layer) => {
         
-        // --- ADICIONE ESTA LINHA ---
+        // --- log ---
         console.log("Propriedades recebidas:", feature.properties); 
         // -------------------------
 
@@ -52,4 +55,9 @@ fetch("dados/mun_titulos_sda.geojson")
     console.error("Erro no processamento do GeoJSON:", error);
     // Adiciona um alerta visual no site para o usuário saber do erro
     alert("Ocorreu um erro ao carregar os dados do mapa. Verifique o console para mais detalhes.");
+  })
+
+  .finally(() => {
+    // Loading.
+    loadingOverlay.style.display = 'none';
   });
